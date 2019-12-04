@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>登录</title>
+		<link rel="shortcut icon" href="../res/img/logo.png" />
+		<link rel="stylesheet" href="../res/lib/layui/css/layui.css" media="all">
+		<link rel="stylesheet" type="text/css" href="../res/css/login.css" >
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<script src="../res/lib/jquery-3.2.1.min.js"></script>
+		<script src="../res/lib/layui/layui.js"></script>
+	</head>
+	<body style="background: url(../res/img/loginback.jpg)">
+	    <div class="backdrop-img">
+        <div class="logo_title">
+        	<img src="../res/img/logo.png" class="logo-img">
+        	<h1 class="logo_name">会议室预定系统</h1>
+        </div>
+        <div class="land-content">
+            <P class="land-ad">登录</P>
+            <div class="register-content  layui-form">
+               <div class="layui-form-item">
+			    <div class="">
+			      <input type="text" name="user_name" required  lay-verify="required" placeholder="请输入用户名" autocomplete="off" class="layui-input">
+			    </div>
+			  </div>
+			  <div class="layui-form-item">
+			    <div class="">
+			      <input type="password" name="user_password" required lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input">
+			    </div>
+			  </div>
+			  <div class="layui-form-item">
+			    <div class="layui-input-block">
+			      <button class="layui-btn" lay-submit lay-filter="formDemo">立即登录</button>
+			    </div>
+			  </div>
+            </div>
+        </div>
+    </div>
+	<!-- <script src="http://aladdin.zj.chinamobile.com/aiStatic/cdn/js/jwt/jwt.base.js"></script> -->
+	<!--<script src="../res/js/jwt.base.js"></script>-->
+	<script src="../res/js/common.js"></script>
+	<script src="../res/js/login.js"></script>
+</body>
+</html>
