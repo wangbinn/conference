@@ -70,7 +70,16 @@ layui.use('table', function() {
             align : 'center',
             width : '7%',
             sort : true,
-            title : '多媒体'
+            title : '多媒体',
+			templet: function (item) {
+				if (item.multimedia == '0') {
+					return "无";
+				} else if (item.multimedia == '1') {
+					return "有";
+				} else {
+					return "";
+				}
+			}
 		}, {
 		    field : 'name',
             align : 'center',
@@ -125,7 +134,24 @@ layui.use('table', function() {
 
 		if (layEvent === 'booking') { //预定
 			// addParamToUrl("id", data.id);
-			loadModule("./bookingOK.html");
+			// loadModule("./bookingOK.html");
+			// layer.open({title: '提示', icon: '1', content:result.msg,time:2000,end:function(){
+			// 		parent.layer.closeAll();
+			// 	}});
+			let article = obj.data;
+			layer.open({
+				type : 2,
+				title : '查看文章: ' + article.name,
+				btn : [ '关闭' ],
+				area : [ '76%', '90%' ],
+				content : './articleView.html?articleId=' + article.id,
+				time: 5000,
+				success : function(data) {
+				},
+				yes : function(index) {
+					layer.close(index);
+				}
+			});
 		}
 		// else if (layEvent === 'del') { //删除
 		// 		layer.confirm('真的删除行么', function(index) {
@@ -151,21 +177,22 @@ layui.use('table', function() {
 		// 	}
 	});
 
-	// table.on('rowDouble(conference)', function(obj) {
-	// 	let article = obj.data;
-	// 	layer.open({
-	// 		type : 2,
-	// 		title : '查看文章: ' + article.name,
-	// 		btn : [ '关闭' ],
-	// 		area : [ '76%', '90%' ],
-	// 		content : './articleView.html?articleId=' + article.id,
-	// 		success : function(data) {
-	// 		},
-	// 		yes : function(index) {
-	// 			layer.close(index);
-	// 		}
-	// 	});
-	// });
+	table.on('rowDouble(conference)', function(obj) {
+		let article = obj.data;
+		layer.open({
+			type : 2,
+			title : '查看文章: ' + article.name,
+			btn : [ '关闭' ],
+			area : [ '76%', '90%' ],
+			content : './articleView.html?articleId=' + article.id,
+			time: 5000,
+			success : function(data) {
+			},
+			yes : function(index) {
+				layer.close(index);
+			}
+		});
+	});
 
 });
 

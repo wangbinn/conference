@@ -13,21 +13,19 @@ layui.use('table', function() {
 		page : false, // 开启分页
 		// where : {},
 		// parseData : function(res) {
-		// 	if (res.status == 0) {
+		// 	if (res.code == 0) {
 		// 		//对当前数据状态进行字典映射
 		// 		var rows = res.data.rows;
-		// 		for ( var i in rows) {
+		// 		for (var i in rows) {
 		// 			if (rows[i].multimedia == 0) {
 		// 				rows[i].multimedia = '有';
 		// 			} else if (rows[i].multimedia == 1) {
 		// 				rows[i].multimedia = '无';
 		// 			}
 		// 		}
-		// 		console.log("rows:"+rows);
-		// 		console.log("res:"+res.data.rows);
-        //
+		//
 		// 		return {
-		// 			"code" : res.status, // 解析接口状态
+		// 			"code" : res.code, // 解析接口状态
 		// 			"msg" : res.msg, // 解析提示文本
 		// 			"count" : res.count, // 解析数据长度
 		// 			"data" : rows // 解析数据列表
@@ -39,15 +37,14 @@ layui.use('table', function() {
 		// 	}
 		// },
 		cols : [ [ // 表头
-		// {
-		// 	field : 'id',
-		// 	align : 'center',
-		// 	width : '10%',
-		// 	sort : true,
-		// 	title : '会议室ID',
-		// 	//hide : true
-		// },
-            {
+		{
+			field : 'id',
+			align : 'center',
+			width : '5%',
+			sort : true,
+			title : 'ID'
+			//hide : true
+		}, {
 			field : 'roomNumber',
 			align : 'center',
 			width : '7%',
@@ -56,7 +53,7 @@ layui.use('table', function() {
 		}, {
 			field : 'floor',
 			align : 'center',
-			width : '7%',
+			width : '6%',
 			sort : true,
 			title : '楼层'
 		}, {
@@ -70,7 +67,16 @@ layui.use('table', function() {
             align : 'center',
             width : '7%',
             sort : true,
-            title : '多媒体'
+            title : '多媒体',
+			templet: function (item) {
+				if (item.multimedia == '0') {
+					return "无";
+				} else if (item.multimedia == '1') {
+					return "有";
+				} else {
+					return "";
+				}
+			}
 		}, {
 		    field : 'name',
             align : 'center',
@@ -92,18 +98,18 @@ layui.use('table', function() {
         }, {
             field : 'scheduledStartTime',
             align : 'center',
-            width : '15%',
+            width : '14%',
             sort : true,
             title : '开始时间'
         }, {
             field : 'scheduledEndTime',
             align : 'center',
-            width : '15%',
+            width : '14%',
             sort : true,
             title : '结束时间'
 		}, {
 			title : '操作',
-			Width : '10%',
+			Width : '8%',
 			fixed : 'right',
 			align : 'center',
 			toolbar : '#historyActive'
@@ -126,32 +132,12 @@ layui.use('table', function() {
 		if (layEvent === 'del') { //删除
 			// addParamToUrl("id", data.id);
 			// loadModule("./bookingOK.html");
-			layer.confirm('真的删除行么', function(index) {
+			layer.confirm('真的取消么', function(index) {
 
 			});
+		} else if (layEvent === 'noDel') {
+			layer.msg("预定日期已过，不可取消");
 		}
-		// else if (layEvent === 'del') { //删除
-		// 		layer.confirm('真的删除行么', function(index) {
-		// 			$.ajax({
-		// 				type : "POST",
-		// 				url : rootPath + "/article/delete",
-		// 				data : {
-		// 					articleId : data.id
-		// 				},
-		// 				dataType : "json",
-		// 				success : function(data) {
-		// 					tableReload(tables.config.page.curr);
-		// 					obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
-		// 					layer.close(index);
-		// 					layer.msg(data.data);
-		// 				},
-		// 				error : function(e) {
-		// 					console.log(e);
-		// 				}
-		// 			});
-		//
-		// 		});
-		// 	}
 	});
 
 	// table.on('rowDouble(history)', function(obj) {
