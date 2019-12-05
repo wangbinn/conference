@@ -62,4 +62,22 @@ public class ConferenceController {
         return map;
     }
 
+    @RequestMapping("/booking")
+    @ResponseBody
+    public Map booking(String bookingInfo){
+        JSONObject jsonObject = JSON.parseObject(bookingInfo);
+        Integer id = jsonObject.getInteger("id");
+        String userName = jsonObject.getString("userName");
+        String startDate = jsonObject.getString("bookingWithStartDate");
+        String endDate = jsonObject.getString("bookingWithEndDate");
+
+        System.out.println(id + userName + startDate + endDate);
+
+//        JSONArray datas = bookingRecordService.record(name);
+        HashMap map = new HashMap();
+        map.put("status","0");
+        map.put("msg","预订成功");
+        return map;
+    }
+
 }

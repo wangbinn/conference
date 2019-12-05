@@ -14,32 +14,6 @@ layui.use('table', function() {
         url : "http://localhost:8080/conference/list", // 数据接口
 		page : false, // 开启分页
 		// where : {},
-		// parseData : function(res) {
-		// 	if (res.status == 0) {
-		// 		//对当前数据状态进行字典映射
-		// 		var rows = res.data.rows;
-		// 		for ( var i in rows) {
-		// 			if (rows[i].multimedia == 0) {
-		// 				rows[i].multimedia = '有';
-		// 			} else if (rows[i].multimedia == 1) {
-		// 				rows[i].multimedia = '无';
-		// 			}
-		// 		}
-		// 		console.log("rows:"+rows);
-		// 		console.log("res:"+res.data.rows);
-        //
-		// 		return {
-		// 			"code" : res.status, // 解析接口状态
-		// 			"msg" : res.msg, // 解析提示文本
-		// 			"count" : res.count, // 解析数据长度
-		// 			"data" : rows // 解析数据列表
-		// 		};
-		// 	} else {
-		// 		return { // 解析接口状态
-		// 			"msg" : res.msg
-		// 		};
-		// 	}
-		// },
 		cols : [ [ // 表头
 		{
 			field : 'id',
@@ -139,14 +113,17 @@ layui.use('table', function() {
 			// layer.open({title: '提示', icon: '1', content:result.msg,time:2000,end:function(){
 			// 		parent.layer.closeAll();
 			// 	}});
-			let article = obj.data;
 			layer.open({
 				type : 2,
-				title : '查看文章: ' + article.name,
-				btn : [ '关闭' ],
-				area : [ '76%', '90%' ],
-				content : './articleView.html?articleId=' + article.id,
-				time: 5000,
+				title : '预定会议室: ' + data.roomNumber,
+				// btn : [ '关闭' ],
+				area : [ '66%', '72%' ],
+				content : './booking.html?id=' + data.id
+					+ "&name=" + data.name + "&phone=" + data.phone + "&mail=" + data.mail + "&floor=" + data.floor
+					+ "&roomNumber=" + data.roomNumber + "&seatNumber=" + data.seatNumber + "&multimedia=" + data.multimedia
+					+ "&userName=" + document.getElementById('user_name').innerHTML
+					+ "&startTime=" + $("#searchWithStartDate").val() + "&endTime=" + $("#searchWithEndDate").val(),
+				time: 60000,
 				success : function(data) {
 				},
 				yes : function(index) {
