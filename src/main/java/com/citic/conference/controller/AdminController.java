@@ -106,17 +106,17 @@ public class AdminController {
         String roomNumber = jsonObject.getString("roomNumber");
         Integer seatNumber = jsonObject.getInteger("seatNumber");
         Integer multimedia = jsonObject.getInteger("multimedia");
-
-        System.out.println(principalId + floor + roomNumber + seatNumber + multimedia);
-
+        //System.out.println(principalId + floor + roomNumber + seatNumber + multimedia);
+        Boolean rommBoolean = adminService.createRoom(principalId,
+                floor, roomNumber, seatNumber, multimedia);
         HashMap map = new HashMap();
         Boolean idBoolean = true;
-        if (idBoolean==true){
+        if (rommBoolean==true){
             map.put("status","0");
             map.put("msg","添加成功");
         }else{
             map.put("status","1");
-            map.put("msg","添加失败");
+            map.put("msg","房间号冲突，添加失败！");
         }
         return map;
     }
@@ -126,8 +126,8 @@ public class AdminController {
     public Map getPrincipal(){
         HashMap map = new HashMap();
         List list = jdbcTemplate.queryForList("select id,name from Principal");
-        System.out.println("Principal:"+list);
-//        map.put("status","0");
+       // System.out.println("Principal:"+list);
+        map.put("status","0");
         map.put("data",list);
         return map;
     }
