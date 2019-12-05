@@ -1,6 +1,8 @@
 package com.citic.conference.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.citic.conference.database.BaseService;
 import com.citic.conference.database.ProcedureContext;
 import com.citic.conference.database.ProcedureParam;
@@ -50,6 +52,19 @@ public class ConferenceController {
     @ResponseBody
     public Map historyList(String name){
         JSONArray datas = bookingRecordService.record(name);
+        HashMap map = new HashMap();
+        map.put("code","0");
+        map.put("msg","this is msg");
+        map.put("data",datas);
+        map.put("count","2");
+        return map;
+    }
+
+    @RequestMapping("/listByDate")
+    @ResponseBody
+    public Map listByDate(String startDate,String endDate){
+        JSONArray datas = bookingService.conditionBookInfo(startDate,endDate);
+        System.out.println("startDate:"+startDate+",endDate:"+endDate);
         HashMap map = new HashMap();
         map.put("code","0");
         map.put("msg","this is msg");

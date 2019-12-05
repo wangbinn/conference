@@ -1,5 +1,4 @@
 package com.citic.conference.service;
-
 import com.alibaba.fastjson.JSONArray;
 import com.citic.conference.database.BaseService;
 import com.citic.conference.database.ProcedureContext;
@@ -10,7 +9,8 @@ import org.springframework.stereotype.Service;
 import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
-
+/**查询当前用户已经预订的会议室记录
+ */
 @Service
 public class BookingRecordService {
 
