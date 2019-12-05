@@ -54,11 +54,18 @@ layui.use('table', function() {
 				}
 			}
 		}, {
-		    field : 'name',
+		    field : 'principalId',
             align : 'center',
             width : '7%',
             sort : true,
-            title : '负责人'
+            title : '负责人ID',
+			hide : true
+		}, {
+			field : 'name',
+			align : 'center',
+			width : '7%',
+			sort : true,
+			title : '负责人'
         }, {
             field : 'phone',
             align : 'center',
@@ -106,14 +113,14 @@ layui.use('table', function() {
 		let tr = obj.tr; //获得当前行 tr 的DOM对象
 
 		if (layEvent === 'update') { //更新
-			let article = obj.data;
 			layer.open({
 				type : 2,
-				title : '修改会议室信息: ' + article.name,
-				btn : [ '关闭' ],
-				area : [ '76%', '90%' ],
-				content : './articleView.html?articleId=' + article.id,
-				time: 5000,
+				title : '修改会议室信息: ' + data.roomNumber,
+				// btn : [ '关闭' ],
+				area : [ '66%', '72%' ],
+				content : './meetingRoomUpdate.html?id=' + data.id
+					+ "&principalId=" + data.principalId + "&floor=" + data.floor
+					+ "&roomNumber=" + data.roomNumber + "&seatNumber=" + data.seatNumber + "&multimedia=" + data.multimedia,
 				success : function(data) {
 				},
 				yes : function(index) {
@@ -145,22 +152,22 @@ layui.use('table', function() {
 			}
 	});
 
-	table.on('rowDouble(conference)', function(obj) {
-		let article = obj.data;
-		layer.open({
-			type : 2,
-			title : '查看文章: ' + article.name,
-			btn : [ '关闭' ],
-			area : [ '76%', '90%' ],
-			content : './articleView.html?articleId=' + article.id,
-			time: 5000,
-			success : function(data) {
-			},
-			yes : function(index) {
-				layer.close(index);
-			}
-		});
-	});
+	// table.on('rowDouble(conference)', function(obj) {
+	// 	let article = obj.data;
+	// 	layer.open({
+	// 		type : 2,
+	// 		title : '查看文章: ' + article.name,
+	// 		btn : [ '关闭' ],
+	// 		area : [ '76%', '90%' ],
+	// 		content : './articleView.html?articleId=' + article.id,
+	// 		time: 5000,
+	// 		success : function(data) {
+	// 		},
+	// 		yes : function(index) {
+	// 			layer.close(index);
+	// 		}
+	// 	});
+	// });
 
 });
 

@@ -132,4 +132,31 @@ public class AdminController {
         return map;
     }
 
+    @RequestMapping("/meetingRoomUpdate")
+    @ResponseBody
+    public Map meetingRoomUpdate(String meetingRoomInfo){
+        JSONObject jsonObject = JSON.parseObject(meetingRoomInfo);
+        Integer principalId = jsonObject.getInteger("principal");
+        String floor = jsonObject.getString("floor");
+        String roomNumber = jsonObject.getString("roomNumber");
+        Integer seatNumber = jsonObject.getInteger("seatNumber");
+        Integer multimedia = jsonObject.getInteger("multimedia");
+        //System.out.println(principalId + floor + roomNumber + seatNumber + multimedia);
+
+        //上面就是参数，这里把这五个都变成可修改的了
+
+//        Boolean rommBoolean = adminService.createRoom(principalId,
+//                floor, roomNumber, seatNumber, multimedia);
+        HashMap map = new HashMap();
+//        Boolean idBoolean = true;
+//        if (rommBoolean==true){
+//            map.put("status","0");
+//            map.put("msg","添加成功");
+//        }else{
+//            map.put("status","1");
+//            map.put("msg","房间号冲突，添加失败！");
+//        }
+        return map;
+    }
+
 }

@@ -117,7 +117,7 @@ layui.use('table', function() {
 					+ "&roomNumber=" + data.roomNumber + "&seatNumber=" + data.seatNumber + "&multimedia=" + data.multimedia
 					+ "&userName=" + document.getElementById('user_name').innerHTML
 					+ "&startTime=" + $("#searchWithStartDate").val() + "&endTime=" + $("#searchWithEndDate").val(),
-				time: 60000,
+				// time: 60000,
 				success : function(data) {
 				},
 				yes : function(index) {
@@ -128,14 +128,18 @@ layui.use('table', function() {
 	});
 
 	table.on('rowDouble(conference)', function(obj) {
-		let article = obj.data;
+		let data = obj.data;
 		layer.open({
 			type : 2,
-			title : '查看文章: ' + article.name,
-			btn : [ '关闭' ],
-			area : [ '76%', '90%' ],
-			content : './articleView.html?articleId=' + article.id,
-			time: 5000,
+			title : '预定会议室: ' + data.roomNumber,
+			// btn : [ '关闭' ],
+			area : [ '66%', '72%' ],
+			content : './booking.html?id=' + data.id
+				+ "&name=" + data.name + "&phone=" + data.phone + "&mail=" + data.mail + "&floor=" + data.floor
+				+ "&roomNumber=" + data.roomNumber + "&seatNumber=" + data.seatNumber + "&multimedia=" + data.multimedia
+				+ "&userName=" + document.getElementById('user_name').innerHTML
+				+ "&startTime=" + $("#searchWithStartDate").val() + "&endTime=" + $("#searchWithEndDate").val(),
+			// time: 60000,
 			success : function(data) {
 			},
 			yes : function(index) {
