@@ -50,8 +50,9 @@ public class BookingService {
         } catch (ParseException e) {
             e.printStackTrace();
         }
+        //将以前过期的预订记录排除掉
         List<ProcedureParam> pm = new ArrayList<ProcedureParam>();
-        ProcedureParam pp1 = new ProcedureParam(1,"2019-12-01 14:00:00", Types.VARCHAR, "IN");
+        ProcedureParam pp1 = new ProcedureParam(1,startTime, Types.VARCHAR, "IN");
         pm.add(pp1);
         ProcedureContext bookTimeSelect =
                 baseService.callProcedure("BookTime_Select",pm);
@@ -119,5 +120,27 @@ public class BookingService {
     }
 
     //将用户选中的会议室信息插入到预定表中
+    public Boolean bookingRoom(Integer roomId,String userName,
+                               String startTime,String endTime,String apply ){
+        List<ProcedureParam> pm = new ArrayList<ProcedureParam>();
+        ProcedureParam pp1 = new ProcedureParam(1,String.valueOf(roomId), Types.VARCHAR, "IN");
+        ProcedureParam pp2 = new ProcedureParam(2,userName, Types.VARCHAR, "IN");
+        ProcedureParam pp3 = new ProcedureParam(3,startTime, Types.VARCHAR, "IN");
+        ProcedureParam pp4 = new ProcedureParam(4,endTime, Types.VARCHAR, "IN");
+        ProcedureParam pp5 = new ProcedureParam(5,apply, Types.VARCHAR, "IN");
+        pm.add(pp1);
+        pm.add(pp2);
+        pm.add(pp3);
+        pm.add(pp4);
+        pm.add(pp5);
+        try{
+            ProcedureContext booking =
+                    baseService.callProcedure("Booking_MeetRoom",pm);
+            return true;
+        }catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
+    }
 
 }
