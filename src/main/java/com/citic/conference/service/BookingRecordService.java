@@ -20,7 +20,7 @@ public class BookingRecordService {
     public JSONArray record(String name) {
         List<ProcedureParam> pm = new ArrayList<ProcedureParam>();
         ProcedureParam pp1 = new ProcedureParam(1,name, Types.VARCHAR, "IN");
-        System.out.println("name"+name);
+        //System.out.println("name"+name);
         pm.add(pp1);
         ProcedureContext scheduledRecord =
                 baseService.callProcedure("Select_ScheduledRecord", pm);

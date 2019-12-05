@@ -42,7 +42,6 @@ public class ConferenceController {
         }else {
             datas = bookingService.conditionBookInfo(startDate,endDate);
         }
-
         HashMap map = new HashMap();
         map.put("code","0");
         map.put("msg","this is msg");
@@ -55,19 +54,6 @@ public class ConferenceController {
     @ResponseBody
     public Map historyList(String name){
         JSONArray datas = bookingRecordService.record(name);
-        HashMap map = new HashMap();
-        map.put("code","0");
-        map.put("msg","this is msg");
-        map.put("data",datas);
-        map.put("count",datas.size());
-        return map;
-    }
-
-    @RequestMapping("/listByDate")
-    @ResponseBody
-    public Map listByDate(String startDate,String endDate){
-        JSONArray datas = bookingService.conditionBookInfo(startDate,endDate);
-        System.out.println("startDate:"+startDate+",endDate:"+endDate);
         HashMap map = new HashMap();
         map.put("code","0");
         map.put("msg","this is msg");

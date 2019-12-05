@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.citic.conference.database.BaseService;
 import com.citic.conference.database.ProcedureContext;
 import com.citic.conference.database.ProcedureParam;
+import com.microsoft.sqlserver.jdbc.SQLServerException;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -32,7 +33,10 @@ class ConferenceApplicationTests {
     @Test
     void contextLoads() {
 
-        judgeMeetingRoomTime("2019-12-01 14:00:00","2019-12-01 18:00:00");
+        //judgeMeetingRoomTime("2019-12-01 14:00:00","2019-12-01 18:00:00");
+        //Boolean user = registerUser("小宋", "123", "数字");
+       // Boolean aBoolean = deleteRoomById(4);
+       // System.out.println(aBoolean);
     }
 
     //用户登录
@@ -156,5 +160,36 @@ class ConferenceApplicationTests {
         }
 
 
+    }
+
+    public Boolean registerUser(String name,String password,String passwordhint){
+        //将新用户信息注册到用户表
+        String sql="INSERT INTO [User] (name,passWord,passWordHint) VALUES(?,?,?)";
+        int register=0 ;
+        try {
+            register=jdbcTemplate.update(sql, name, password, passwordhint);
+        }catch (Exception e){
+             e.printStackTrace();
+        }
+
+        if (register==1){
+            return true;
+        }else {
+            return false;
+        }
+    }
+
+    public Boolean deleteRoomById(Integer id){
+        String sql="DELETE FROM MeetingRoom WHERE id=?";
+        int register=0 ;
+        try {
+            register=jdbcTemplate.update(sql, id);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        if (register==1){
+            return true;
+        }else
+            return false;
     }
 }

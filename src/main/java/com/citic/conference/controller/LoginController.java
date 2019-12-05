@@ -70,9 +70,15 @@ public class LoginController {
         JSONObject jsonObject = JSON.parseObject(userJson);
         String name=jsonObject.getString("user_name");
         String password=jsonObject.getString("user_password");
-        String passwordhimt=jsonObject.getString("password_hint");
-        map.put("status","0");
-        map.put("msg","注册未成功");
+        String passwordhint=jsonObject.getString("password_hint");
+        Boolean userBoolen = loginService.registerUser(name, password, passwordhint);
+        if (userBoolen==true){
+            map.put("status","0");
+            map.put("msg","注册成功");
+        }else{
+            map.put("status","1");
+            map.put("msg","用户名已有，注册不成功");
+        }
         return map;
     }
 

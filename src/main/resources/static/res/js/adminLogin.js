@@ -4,7 +4,7 @@ layui.use('form', function() {
 
 	form.on('submit(formDemo)', function(data) {
 		$.ajax({
-			url : "http://localhost:8080" + "/adminLogin",
+			url : "http://localhost:8080" + "/admin/adminLogin",
 			dataType : "json",
 			data : {
 				adminJson : JSON.stringify(data.field)

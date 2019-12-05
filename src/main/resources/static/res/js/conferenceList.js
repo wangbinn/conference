@@ -10,7 +10,8 @@ layui.use('table', function() {
 		elem : '#conference',
 		// limit : 10,
 		// limits : [ 10, 20, 30, 40 ],
-		url : "http://localhost:8080/conference/list", // 数据接口
+		//url : "http://localhost:8080/conference/listByDate", // 数据接口
+        url : "http://localhost:8080/conference/list", // 数据接口
 		page : false, // 开启分页
 		// where : {},
 		// parseData : function(res) {

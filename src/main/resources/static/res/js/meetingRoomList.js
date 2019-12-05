@@ -10,7 +10,7 @@ layui.use('table', function() {
 		elem : '#conference',
 		// limit : 10,
 		// limits : [ 10, 20, 30, 40 ],
-		url : "http://localhost:8080/conference/list", // 数据接口
+		url : "http://localhost:8080/admin/list", // 数据接口
 		page : false, // 开启分页
 		// where : {},
 		cols : [ [ // 表头
@@ -106,7 +106,7 @@ layui.use('table', function() {
 		let layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
 		let tr = obj.tr; //获得当前行 tr 的DOM对象
 
-		if (layEvent === 'booking') { //预定
+		if (layEvent === 'update') { //更新
 			// addParamToUrl("id", data.id);
 			// loadModule("./bookingOK.html");
 			// layer.open({title: '提示', icon: '1', content:result.msg,time:2000,end:function(){
@@ -115,7 +115,7 @@ layui.use('table', function() {
 			let article = obj.data;
 			layer.open({
 				type : 2,
-				title : '查看文章: ' + article.name,
+				title : '修改会议室信息: ' + article.name,
 				btn : [ '关闭' ],
 				area : [ '76%', '90%' ],
 				content : './articleView.html?articleId=' + article.id,
@@ -127,28 +127,28 @@ layui.use('table', function() {
 				}
 			});
 		}
-		// else if (layEvent === 'del') { //删除
-		// 		layer.confirm('真的删除行么', function(index) {
-		// 			$.ajax({
-		// 				type : "POST",
-		// 				url : rootPath + "/article/delete",
-		// 				data : {
-		// 					articleId : data.id
-		// 				},
-		// 				dataType : "json",
-		// 				success : function(data) {
-		// 					tableReload(tables.config.page.curr);
-		// 					obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
-		// 					layer.close(index);
-		// 					layer.msg(data.data);
-		// 				},
-		// 				error : function(e) {
-		// 					console.log(e);
-		// 				}
-		// 			});
-		//
-		// 		});
-		// 	}
+		else if (layEvent === 'del') { //删除
+				layer.confirm('真的删除行么', function(index) {
+					$.ajax({
+						type : "POST",
+						url :"http://localhost:8080/admin/deleteById",
+						data : {
+							id : data.id
+						},
+						dataType : "json",
+						success : function(data) {
+							tableReload(tables.config.page.curr);
+							obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
+							layer.close(index);
+							layer.msg(data.msg);
+						},
+						error : function(e) {
+							console.log(e);
+						}
+					});
+
+				});
+			}
 	});
 
 	table.on('rowDouble(conference)', function(obj) {
@@ -193,40 +193,40 @@ function nowDateTime(){
 	return now.getFullYear()+"-" + (now.getMonth()+1) + "-" + now.getDate() + " " + now.getHours()+":"+now.getSeconds()+":"+now.getMinutes();
 }
 
-layui.use('laydate', function() {
-	var laydate = layui.laydate;
-
-	//日期范围
-	var startDate=laydate.render({
-		elem: '#searchWithStartDate',
-		type: 'datetime',
-		istime: true,
-		istoday: true,
-		min:nowDateTime(),
-		done:function(value,date){
-			if(value!=""){
-				date.month=date.month-1;
-				endDate.config.min=date;
-			}else{
-				endDate.config.min=startDate.config.min;
-			}
-		},
-	});
-	var endDate =laydate.render({
-		elem: '#searchWithEndDate',
-		type: 'datetime',
-		istime: true,
-		istoday: true,
-		done:function(value,date){
-			if(value!=""){
-				date.month=date.month-1;
-				startDate.config.max=date;
-			}else{
-				startDate.config.max=endDate.config.max;
-			}
-		}
-	});
-});
+// layui.use('laydate', function() {
+// 	var laydate = layui.laydate;
+//
+// 	//日期范围
+// 	var startDate=laydate.render({
+// 		elem: '#searchWithStartDate',
+// 		type: 'datetime',
+// 		istime: true,
+// 		istoday: true,
+// 		min:nowDateTime(),
+// 		done:function(value,date){
+// 			if(value!=""){
+// 				date.month=date.month-1;
+// 				endDate.config.min=date;
+// 			}else{
+// 				endDate.config.min=startDate.config.min;
+// 			}
+// 		},
+// 	});
+// 	var endDate =laydate.render({
+// 		elem: '#searchWithEndDate',
+// 		type: 'datetime',
+// 		istime: true,
+// 		istoday: true,
+// 		done:function(value,date){
+// 			if(value!=""){
+// 				date.month=date.month-1;
+// 				startDate.config.max=date;
+// 			}else{
+// 				startDate.config.max=endDate.config.max;
+// 			}
+// 		}
+// 	});
+// });
 
 function tableReload(pageNum) {
 	tables.reload({
