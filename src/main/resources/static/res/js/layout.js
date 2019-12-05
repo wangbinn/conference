@@ -1,7 +1,9 @@
 //显示用户名
-// document.getElementById('user_name').innerHTML = getUrlParam("userName");
-// console.log(document.getElementById('user_name').innerHTML);
-// $('#user_name').val(getUrlParam("userName"));
+var userName = getUrlParam("userName");
+if (userName != undefined) {
+	localStorage.setItem('userName', userName);
+}
+document.getElementById('user_name').innerHTML = localStorage.getItem("userName");
 
 layui.use([ 'element', 'layer' ], function() {
 	"user strict";

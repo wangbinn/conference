@@ -130,22 +130,6 @@ layui.use('table', function() {
 		}
 	});
 
-	// table.on('rowDouble(history)', function(obj) {
-	// 	let article = obj.data;
-	// 	layer.open({
-	// 		type : 2,
-	// 		title : '查看文章: ' + article.name,
-	// 		btn : [ '关闭' ],
-	// 		area : [ '76%', '90%' ],
-	// 		content : './articleView.html?articleId=' + article.id,
-	// 		success : function(data) {
-	// 		},
-	// 		yes : function(index) {
-	// 			layer.close(index);
-	// 		}
-	// 	});
-	// });
-
 });
 
 layui.use('layer', function() {
@@ -219,36 +203,4 @@ function tableReload(pageNum) {
 		// //重新从第 1 页开始
 		// }
 	});
-}
-
-// function toArticleCreate() {
-// 	loadModule("./articleCreate.html");
-// }
-
-function showPublished() {
-	if ($('#publishedBtn').hasClass('layui-btn-normal')) {
-		console.log("published has normal");
-		$('#publishedBtn').removeClass('layui-btn-normal').addClass('layui-btn-primary');
-		status = -1;
-		tableReload();
-	} else {
-		$('#publishedBtn').removeClass('layui-btn-primary').addClass('layui-btn-normal');
-		$('#unpublishedBtn').removeClass('layui-btn-normal').addClass('layui-btn-primary');
-		status = 0;
-		tableReload();
-	}
-}
-
-function showUnpublished() {
-	if ($('#unpublishedBtn').hasClass('layui-btn-normal')) {
-		console.log("unPublished has normal");
-		$('#unpublishedBtn').removeClass('layui-btn-normal').addClass('layui-btn-primary');
-		status = -1;
-		tableReload();
-	} else {
-		$('#unpublishedBtn').removeClass('layui-btn-primary').addClass('layui-btn-normal');
-		$('#publishedBtn').removeClass('layui-btn-normal').addClass('layui-btn-primary');
-		status = 1;
-		tableReload();
-	}
 }

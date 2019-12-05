@@ -35,7 +35,6 @@ layui.use('jquery', function(){
     $$ = layui.jquery;
 });
 
-// labelEdit();
 layui.use('form', function() {
     form = layui.form;
     form.val("editPageInit", {

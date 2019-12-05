@@ -1,13 +1,3 @@
-/*window.onload = load;
-function load() {
-	var _topWin = window;
-	while (_topWin != _topWin.parent.window) {
-		_topWin = _topWin.parent.window;
-	}
-	if (window != _topWin) {
-		_topWin.document.location.href = ctx;
-	}
-}*/
 
 layui.use('form', function() {
 	var form = layui.form;

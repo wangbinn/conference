@@ -106,11 +106,6 @@ layui.use('table', function() {
 		let tr = obj.tr; //获得当前行 tr 的DOM对象
 
 		if (layEvent === 'update') { //更新
-			// addParamToUrl("id", data.id);
-			// loadModule("./booking.html");
-			// layer.open({title: '提示', icon: '1', content:result.msg,time:2000,end:function(){
-			// 		parent.layer.closeAll();
-			// 	}});
 			let article = obj.data;
 			layer.open({
 				type : 2,
@@ -198,32 +193,4 @@ function tableReload(pageNum) {
 
 function toMeetingRoomCreate() {
 	loadModule("./meetingRoomCreate.html");
-}
-
-function showPublished() {
-	if ($('#publishedBtn').hasClass('layui-btn-normal')) {
-		console.log("published has normal");
-		$('#publishedBtn').removeClass('layui-btn-normal').addClass('layui-btn-primary');
-		status = -1;
-		tableReload();
-	} else {
-		$('#publishedBtn').removeClass('layui-btn-primary').addClass('layui-btn-normal');
-		$('#unpublishedBtn').removeClass('layui-btn-normal').addClass('layui-btn-primary');
-		status = 0;
-		tableReload();
-	}
-}
-
-function showUnpublished() {
-	if ($('#unpublishedBtn').hasClass('layui-btn-normal')) {
-		console.log("unPublished has normal");
-		$('#unpublishedBtn').removeClass('layui-btn-normal').addClass('layui-btn-primary');
-		status = -1;
-		tableReload();
-	} else {
-		$('#unpublishedBtn').removeClass('layui-btn-primary').addClass('layui-btn-normal');
-		$('#publishedBtn').removeClass('layui-btn-normal').addClass('layui-btn-primary');
-		status = 1;
-		tableReload();
-	}
 }

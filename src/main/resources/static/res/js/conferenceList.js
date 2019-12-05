@@ -1,7 +1,6 @@
 var table;
 var tables;
 var layer;
-// var status; //文章状态,作为查询条件
 
 layui.use('table', function() {
 	var table = layui.table;
@@ -126,28 +125,6 @@ layui.use('table', function() {
 				}
 			});
 		}
-		// else if (layEvent === 'del') { //删除
-		// 		layer.confirm('真的删除行么', function(index) {
-		// 			$.ajax({
-		// 				type : "POST",
-		// 				url : rootPath + "/article/delete",
-		// 				data : {
-		// 					articleId : data.id
-		// 				},
-		// 				dataType : "json",
-		// 				success : function(data) {
-		// 					tableReload(tables.config.page.curr);
-		// 					obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
-		// 					layer.close(index);
-		// 					layer.msg(data.data);
-		// 				},
-		// 				error : function(e) {
-		// 					console.log(e);
-		// 				}
-		// 			});
-		//
-		// 		});
-		// 	}
 	});
 
 	table.on('rowDouble(conference)', function(obj) {
@@ -240,36 +217,4 @@ function tableReload(pageNum) {
 		// //重新从第 1 页开始
 		// }
 	});
-}
-
-// function toArticleCreate() {
-// 	loadModule("./articleCreate.html");
-// }
-
-function showPublished() {
-	if ($('#publishedBtn').hasClass('layui-btn-normal')) {
-		console.log("published has normal");
-		$('#publishedBtn').removeClass('layui-btn-normal').addClass('layui-btn-primary');
-		status = -1;
-		tableReload();
-	} else {
-		$('#publishedBtn').removeClass('layui-btn-primary').addClass('layui-btn-normal');
-		$('#unpublishedBtn').removeClass('layui-btn-normal').addClass('layui-btn-primary');
-		status = 0;
-		tableReload();
-	}
-}
-
-function showUnpublished() {
-	if ($('#unpublishedBtn').hasClass('layui-btn-normal')) {
-		console.log("unPublished has normal");
-		$('#unpublishedBtn').removeClass('layui-btn-normal').addClass('layui-btn-primary');
-		status = -1;
-		tableReload();
-	} else {
-		$('#unpublishedBtn').removeClass('layui-btn-primary').addClass('layui-btn-normal');
-		$('#publishedBtn').removeClass('layui-btn-normal').addClass('layui-btn-primary');
-		status = 1;
-		tableReload();
-	}
 }
