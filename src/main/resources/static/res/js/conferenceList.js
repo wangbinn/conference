@@ -108,11 +108,6 @@ layui.use('table', function() {
 		let tr = obj.tr; //获得当前行 tr 的DOM对象
 
 		if (layEvent === 'booking') { //预定
-			// addParamToUrl("id", data.id);
-			// loadModule("./bookingOK.html");
-			// layer.open({title: '提示', icon: '1', content:result.msg,time:2000,end:function(){
-			// 		parent.layer.closeAll();
-			// 	}});
 			layer.open({
 				type : 2,
 				title : '预定会议室: ' + data.roomNumber,

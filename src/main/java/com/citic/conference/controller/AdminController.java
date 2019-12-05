@@ -6,12 +6,14 @@ import com.alibaba.fastjson.JSONObject;
 import com.citic.conference.database.BaseService;
 import com.citic.conference.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**管理者页面访问处理：
@@ -28,6 +30,8 @@ public class AdminController {
     BaseService baseService;
     @Autowired
     AdminService adminService;
+    @Autowired
+    JdbcTemplate jdbcTemplate;
 
     @PostMapping("/adminLogin")
     public Map adminLogin(String adminJson){
@@ -90,6 +94,41 @@ public class AdminController {
             map.put("status","1");
             map.put("msg","删除失败");
         }
+        return map;
+    }
+
+    @RequestMapping("/meetingRoomCreate")
+    @ResponseBody
+    public Map meetingRoomCreate(String meetingRoomInfo){
+        JSONObject jsonObject = JSON.parseObject(meetingRoomInfo);
+        Integer principalId = jsonObject.getInteger("principal");
+        String floor = jsonObject.getString("floor");
+        String roomNumber = jsonObject.getString("roomNumber");
+        Integer seatNumber = jsonObject.getInteger("seatNumber");
+        Integer multimedia = jsonObject.getInteger("multimedia");
+
+        System.out.println(principalId + floor + roomNumber + seatNumber + multimedia);
+
+        HashMap map = new HashMap();
+        Boolean idBoolean = true;
+        if (idBoolean==true){
+            map.put("status","0");
+            map.put("msg","添加成功");
+        }else{
+            map.put("status","1");
+            map.put("msg","添加失败");
+        }
+        return map;
+    }
+
+    @RequestMapping("/getPrincipal")
+    @ResponseBody
+    public Map getPrincipal(){
+        HashMap map = new HashMap();
+        List list = jdbcTemplate.queryForList("select id,name from Principal");
+        System.out.println("Principal:"+list);
+//        map.put("status","0");
+        map.put("data",list);
         return map;
     }
 

@@ -69,7 +69,7 @@ layui.use('form', function(){
                 success: function(data){
                     if (data.status == "0") {
                         layer.msg(data.msg,{time:2*1000},function () {
-                            layer.closeAll();
+                            parent.layer.closeAll();
                             // loadModule("./historyList.html");
                         });
                     } else {

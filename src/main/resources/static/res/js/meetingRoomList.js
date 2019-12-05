@@ -1,7 +1,6 @@
 var table;
 var tables;
 var layer;
-// var status; //文章状态,作为查询条件
 
 layui.use('table', function() {
 	var table = layui.table;
@@ -30,7 +29,7 @@ layui.use('table', function() {
 		}, {
 			field : 'floor',
 			align : 'center',
-			width : '7%',
+			width : '6%',
 			sort : true,
 			title : '楼层'
 		}, {
@@ -86,7 +85,7 @@ layui.use('table', function() {
             title : '最近预定结束时间'
 		}, {
 			title : '操作',
-			Width : '8%',
+			Width : '9%',
 			fixed : 'right',
 			align : 'center',
 			toolbar : '#conferenceActive'
@@ -108,7 +107,7 @@ layui.use('table', function() {
 
 		if (layEvent === 'update') { //更新
 			// addParamToUrl("id", data.id);
-			// loadModule("./bookingOK.html");
+			// loadModule("./booking.html");
 			// layer.open({title: '提示', icon: '1', content:result.msg,time:2000,end:function(){
 			// 		parent.layer.closeAll();
 			// 	}});
@@ -182,57 +181,11 @@ layui.use('element', function() {
 	var element = layui.element;
 });
 
-//年-月-日
-function nowDate(){
-	var now = new Date();
-	return now.getFullYear()+"-" + (now.getMonth()+1) + "-" + now.getDate();
-}
-//时-分-秒
-function nowDateTime(){
-	var now = new Date();
-	return now.getFullYear()+"-" + (now.getMonth()+1) + "-" + now.getDate() + " " + now.getHours()+":"+now.getSeconds()+":"+now.getMinutes();
-}
-
-// layui.use('laydate', function() {
-// 	var laydate = layui.laydate;
-//
-// 	//日期范围
-// 	var startDate=laydate.render({
-// 		elem: '#searchWithStartDate',
-// 		type: 'datetime',
-// 		istime: true,
-// 		istoday: true,
-// 		min:nowDateTime(),
-// 		done:function(value,date){
-// 			if(value!=""){
-// 				date.month=date.month-1;
-// 				endDate.config.min=date;
-// 			}else{
-// 				endDate.config.min=startDate.config.min;
-// 			}
-// 		},
-// 	});
-// 	var endDate =laydate.render({
-// 		elem: '#searchWithEndDate',
-// 		type: 'datetime',
-// 		istime: true,
-// 		istoday: true,
-// 		done:function(value,date){
-// 			if(value!=""){
-// 				date.month=date.month-1;
-// 				startDate.config.max=date;
-// 			}else{
-// 				startDate.config.max=endDate.config.max;
-// 			}
-// 		}
-// 	});
-// });
-
 function tableReload(pageNum) {
 	tables.reload({
 		where : {
-			startDate : $("#searchWithStartDate").val(),
-			endDate : $("#searchWithEndDate").val()
+			roomNumber : $("#searchWithRoomNumber").val()
+			// endDate : $("#searchWithEndDate").val()
 			// status : status
 		}
 		// ,
