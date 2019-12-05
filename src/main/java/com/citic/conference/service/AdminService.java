@@ -59,6 +59,23 @@ public class AdminService {
         return datas;
     }
 
+    //根据前端传出来的信息创建新的会议室
+    public Boolean createRoom(Integer principalId,String floor,String roomNumber,
+                              Integer seatNumber,Integer multimedia){
+        //将新用户信息注册到用户表
+        String sql="INSERT INTO MeetingRoom (floor,roomNumber,seatNumber,principalId,multimedia) VALUES(?,?,?,?,?)";
+        int register=0 ;
+        try {
+            register=jdbcTemplate.update(sql,floor,roomNumber,seatNumber,principalId,multimedia);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        if (register==1){
+            return true;
+        }else
+            return false;
+    }
+
     //根据房间ID来删除议室相关信息
     public Boolean deleteRoomById(Integer id){
         String sql="DELETE FROM MeetingRoom WHERE id=?";
