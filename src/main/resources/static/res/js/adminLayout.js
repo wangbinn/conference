@@ -1,5 +1,6 @@
 //显示管理员名
-document.getElementById('admin_name').innerHTML = getUrlParam("adminName");
+var adminName = getUrlParam("adminName");
+document.getElementById('admin_name').innerHTML = adminName;
 
 layui.use([ 'element', 'layer' ], function() {
 	"user strict";
