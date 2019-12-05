@@ -10,6 +10,7 @@ import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 /**查询当前用户已经预订的会议室记录
+ * 取消未过期
  */
 @Service
 public class BookingRecordService {
