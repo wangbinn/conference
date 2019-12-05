@@ -1,13 +1,3 @@
-/*window.onload = load;
-function load() {
-	var _topWin = window;
-	while (_topWin != _topWin.parent.window) {
-		_topWin = _topWin.parent.window;
-	}
-	if (window != _topWin) {
-		_topWin.document.location.href = ctx;
-	}
-}*/
 
 layui.use('form', function() {
 	var form = layui.form;
@@ -22,8 +12,8 @@ layui.use('form', function() {
 			type : "POST",
 			success : function(data) {
 				if (data.status == 0) {
-					//jwt.setToken(data.data, '/getToken', '/page/login.html');
-					window.location.href = "./layout.html";
+					// addParamToUrl("userName", "123");
+					window.location.href = "./layout.html?userName="+data.name;
 				} else if (data.status != 0) {
 					layer.msg(data.msg);
 				}

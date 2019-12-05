@@ -1,6 +1,5 @@
-//显示用户名
-document.getElementById('user_name').innerHTML = getUrlParam("userName");
-// $('#user_name').val(getUrlParam("userName"));
+//显示管理员名
+document.getElementById('admin_name').innerHTML = getUrlParam("adminName");
 
 layui.use([ 'element', 'layer' ], function() {
 	"user strict";
@@ -15,8 +14,8 @@ layui.use([ 'element', 'layer' ], function() {
 				dataType : "json",
 				success : function(data) {
 					if (data.status == 0) {
-						window.location.href = './login.html';
-						layer.msg(data.data);
+						window.location.href = './adminLogin.html';
+						layer.msg(data.msg);
 					} else {
 						layer.msg(data.msg);
 					}
@@ -32,9 +31,9 @@ layui.use([ 'element', 'layer' ], function() {
 });
 
 function loadModule(module) {
-	$("#conferenceBookingContainer").load(module);
+	$("#conferenceManageContainer").load(module);
 }
 
 $(document).ready(function() {
-	$("#conferenceListModule").click();
+	$("#meetingRoomListModule").click();
 });

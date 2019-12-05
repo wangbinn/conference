@@ -1,15 +1,16 @@
 var table;
 var tables;
 var layer;
+// var status; //文章状态,作为查询条件
 
 layui.use('table', function() {
 	var table = layui.table;
 	// 第一个实例
 	tables = table.render({
-		elem : '#history',
+		elem : '#conference',
 		// limit : 10,
 		// limits : [ 10, 20, 30, 40 ],
-		url : "http://localhost:8080/conference/history?name=" + $('user_name').val(), // 数据接口
+		url : "http://localhost:8080/conference/list", // 数据接口
 		page : false, // 开启分页
 		// where : {},
 		cols : [ [ // 表头
@@ -20,7 +21,7 @@ layui.use('table', function() {
 			sort : true,
 			title : 'ID'
 			//hide : true
-		}, {
+		},{
 			field : 'roomNumber',
 			align : 'center',
 			width : '7%',
@@ -29,7 +30,7 @@ layui.use('table', function() {
 		}, {
 			field : 'floor',
 			align : 'center',
-			width : '6%',
+			width : '7%',
 			sort : true,
 			title : '楼层'
 		}, {
@@ -68,7 +69,7 @@ layui.use('table', function() {
         }, {
             field : 'mail',
             align : 'center',
-            width : '15%',
+            width : '14%',
             sort : true,
             title : '邮箱'
         }, {
@@ -76,19 +77,19 @@ layui.use('table', function() {
             align : 'center',
             width : '14%',
             sort : true,
-            title : '开始时间'
+            title : '最近预定开始时间'
         }, {
             field : 'scheduledEndTime',
             align : 'center',
             width : '14%',
             sort : true,
-            title : '结束时间'
+            title : '最近预定结束时间'
 		}, {
 			title : '操作',
 			Width : '8%',
 			fixed : 'right',
 			align : 'center',
-			toolbar : '#historyActive'
+			toolbar : '#conferenceActive'
 		} ] ],
 		done : function() {
 			clearParam();
@@ -99,38 +100,73 @@ layui.use('table', function() {
 		tableReload();
 	});
 
-	table.on('tool(history)', function(obj) { //注：tool是工具条事件名，test是table原始容器的属性 lay-filter="对应的值"
+	table.on('tool(conference)', function(obj) { //注：tool是工具条事件名，test是table原始容器的属性 lay-filter="对应的值"
 
 		let data = obj.data; //获得当前行数据
 		let layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
 		let tr = obj.tr; //获得当前行 tr 的DOM对象
 
-		if (layEvent === 'del') { //删除
+		if (layEvent === 'booking') { //预定
 			// addParamToUrl("id", data.id);
 			// loadModule("./bookingOK.html");
-			layer.confirm('真的取消么', function(index) {
-
+			// layer.open({title: '提示', icon: '1', content:result.msg,time:2000,end:function(){
+			// 		parent.layer.closeAll();
+			// 	}});
+			let article = obj.data;
+			layer.open({
+				type : 2,
+				title : '查看文章: ' + article.name,
+				btn : [ '关闭' ],
+				area : [ '76%', '90%' ],
+				content : './articleView.html?articleId=' + article.id,
+				time: 5000,
+				success : function(data) {
+				},
+				yes : function(index) {
+					layer.close(index);
+				}
 			});
-		} else if (layEvent === 'noDel') {
-			layer.msg("预定日期已过，不可取消");
 		}
+		// else if (layEvent === 'del') { //删除
+		// 		layer.confirm('真的删除行么', function(index) {
+		// 			$.ajax({
+		// 				type : "POST",
+		// 				url : rootPath + "/article/delete",
+		// 				data : {
+		// 					articleId : data.id
+		// 				},
+		// 				dataType : "json",
+		// 				success : function(data) {
+		// 					tableReload(tables.config.page.curr);
+		// 					obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
+		// 					layer.close(index);
+		// 					layer.msg(data.data);
+		// 				},
+		// 				error : function(e) {
+		// 					console.log(e);
+		// 				}
+		// 			});
+		//
+		// 		});
+		// 	}
 	});
 
-	// table.on('rowDouble(history)', function(obj) {
-	// 	let article = obj.data;
-	// 	layer.open({
-	// 		type : 2,
-	// 		title : '查看文章: ' + article.name,
-	// 		btn : [ '关闭' ],
-	// 		area : [ '76%', '90%' ],
-	// 		content : './articleView.html?articleId=' + article.id,
-	// 		success : function(data) {
-	// 		},
-	// 		yes : function(index) {
-	// 			layer.close(index);
-	// 		}
-	// 	});
-	// });
+	table.on('rowDouble(conference)', function(obj) {
+		let article = obj.data;
+		layer.open({
+			type : 2,
+			title : '查看文章: ' + article.name,
+			btn : [ '关闭' ],
+			area : [ '76%', '90%' ],
+			content : './articleView.html?articleId=' + article.id,
+			time: 5000,
+			success : function(data) {
+			},
+			yes : function(index) {
+				layer.close(index);
+			}
+		});
+	});
 
 });
 
@@ -188,7 +224,7 @@ layui.use('laydate', function() {
 			}else{
 				startDate.config.max=endDate.config.max;
 			}
-		},
+		}
 	});
 });
 
@@ -207,9 +243,9 @@ function tableReload(pageNum) {
 	});
 }
 
-// function toArticleCreate() {
-// 	loadModule("./articleCreate.html");
-// }
+function toMeetingRoomCreate() {
+	loadModule("./meetingRoomCreate.html");
+}
 
 function showPublished() {
 	if ($('#publishedBtn').hasClass('layui-btn-normal')) {

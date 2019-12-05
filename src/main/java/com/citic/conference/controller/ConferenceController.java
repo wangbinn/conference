@@ -28,9 +28,6 @@ import java.util.Map;
 public class ConferenceController {
 
     @Autowired
-    BaseService baseService;
-
-    @Autowired
     private BookingRecordService bookingRecordService;
 
     @Autowired
@@ -38,13 +35,19 @@ public class ConferenceController {
 
     @RequestMapping("/list")
     @ResponseBody
-    public Map conferenceList(){
-        JSONArray datas = bookingService.bookInit();
+    public Map conferenceList(String startDate,String endDate){
+        JSONArray datas = new JSONArray();
+        if (startDate == null || endDate == null){
+            datas = bookingService.bookInit();
+        }else {
+            datas = bookingService.conditionBookInfo(startDate,endDate);
+        }
+
         HashMap map = new HashMap();
         map.put("code","0");
         map.put("msg","this is msg");
         map.put("data",datas);
-        map.put("count","3");
+        map.put("count",datas.size());
         return map;
     }
 
@@ -56,7 +59,7 @@ public class ConferenceController {
         map.put("code","0");
         map.put("msg","this is msg");
         map.put("data",datas);
-        map.put("count","2");
+        map.put("count",datas.size());
         return map;
     }
 
@@ -69,7 +72,7 @@ public class ConferenceController {
         map.put("code","0");
         map.put("msg","this is msg");
         map.put("data",datas);
-        map.put("count","2");
+        map.put("count",datas.size());
         return map;
     }
 

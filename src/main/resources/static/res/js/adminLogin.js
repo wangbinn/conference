@@ -1,30 +1,18 @@
-/*window.onload = load;
-function load() {
-	var _topWin = window;
-	while (_topWin != _topWin.parent.window) {
-		_topWin = _topWin.parent.window;
-	}
-	if (window != _topWin) {
-		_topWin.document.location.href = ctx;
-	}
-}*/
 
 layui.use('form', function() {
 	var form = layui.form;
 
 	form.on('submit(formDemo)', function(data) {
 		$.ajax({
-			url : "http://localhost:8080" + "/register",
+			url : "http://localhost:8080" + "/adminLogin",
 			dataType : "json",
 			data : {
-				userJson : JSON.stringify(data.field)
+				adminJson : JSON.stringify(data.field)
 			},
 			type : "POST",
 			success : function(data) {
 				if (data.status == 0) {
-					layer.msg(data.msg,{time:2*1000},function () {
-						window.location.href = "./login.html";
-					});
+					window.location.href = "./adminLayout.html?adminName="+data.name;
 				} else if (data.status != 0) {
 					layer.msg(data.msg);
 				}

@@ -38,6 +38,7 @@ public class LoginController {
             if (o.get("").equals("1")){
                // System.out.println("用户存在");
                 map.put("status","0");
+                map.put("name",name);
                 break;
             }
             if ((!o.get("").equals("-1"))&(!o.get("").equals("1"))){

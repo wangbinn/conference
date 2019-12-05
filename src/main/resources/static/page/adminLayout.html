@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-<title>会议室预定系统</title>
+<title>会议室预定系统-管理端</title>
 <link rel="shortcut icon" href="../res/img/logo.png" />
 <link rel="stylesheet" href="../res/lib/layui/css/layui.css" />
 <script src="../res/lib/jquery-3.2.1.min.js"></script>
@@ -13,9 +13,9 @@
 <body class="layui-layout-body">
 	<div class="layui-layout layui-layout-admin">
 		<div class="layui-header">
-			<div class="layui-logo">会议室预定系统</div>
+			<div class="layui-logo">会议室预定系统-管理端</div>
 			<ul class="layui-nav layui-layout-right">
-				<li class="layui-nav-item"><label id="user_name"></label></li>
+				<li class="layui-nav-item"><label id="admin_name"></label></li>
 				<li class="layui-nav-item">
 					<a href="Javascript:;" onclick = "logout();">退出</a>
 				</li>
@@ -26,10 +26,10 @@
 				<!-- 左侧导航区域（可配合layui已有的垂直导航） -->
 				<ul class="layui-nav layui-nav-tree" lay-filter="test">
 					<li class="layui-nav-item layui-nav-itemed">
-						<a href="javascript:;" onclick="loadModule('./conferenceList.html')" id = "conferenceListModule">预定会议室</a>
+						<a href="javascript:;" onclick="loadModule('./meetingRoomList.html')" id = "meetingRoomListModule">会议室管理</a>
 					</li>
 					<li class="layui-nav-item layui-nav-itemed">
-						<a href="javascript:;" onclick="loadModule('./historyList.html')" id = "historyListModule">我的预定记录</a>
+						<a href="javascript:;" onclick="loadModule('./roomManagerList.html')" id = "roomManagerListModule">负责人管理</a>
 					</li>
 				</ul>
 			</div>
@@ -37,12 +37,12 @@
 
 		<div class="layui-body" style="bottom: 0;">
 			<div class="" style="width: 100%; height: 100%;">
-				<div id="conferenceBookingContainer"></div>
+				<div id="conferenceManageContainer"></div>
 			</div>
 		</div>
 	</div>
 
 	<script src="../res/js/common.js"></script>
-	<script src="../res/js/layout.js"></script>
+	<script src="../res/js/adminLayout.js"></script>
 </body>
 </html>

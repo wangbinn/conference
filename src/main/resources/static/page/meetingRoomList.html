@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<title>会议室预订系统-管理端</title>
+<link rel="shortcut icon" href="../res/img/logo.png" />
+<link rel="stylesheet" href="../res/lib/layui/css/layui.css" media="all">
+<link rel="stylesheet" href="../res/css/sceneadd.css">
+</head>
+<body>
+	<div class="layui-row">
+		<div class="layui-col-md4 layui-col-sm4 title">
+			<span class="layui-breadcrumb" lay-separator=">">
+				<a href="javascript:;">会议室管理</a>
+				<a href="" conlick='loadModule("./conferenceList.html");'>会议室列表</a>
+			</span>
+		</div>
+	</div>
+
+
+	<div class="ac-search" style="width: 98%;">
+		<div class="layui-form-item" style="margin-left: 5%">
+			<!--<div class="layui-input-inline">-->
+				<!--<input type="text" placeholder="请选择预定开始时间" class="ac-customId layui-input"-->
+					   <!--id="searchWithStartDate">-->
+			<!--</div>-->
+			<!--<div class="layui-input-inline">-->
+				<!--<input type="text" placeholder="请选择预定结束时间" class="ac-customId layui-input"-->
+					   <!--id="searchWithEndDate">-->
+			<!--</div>-->
+			<div class="layui-input-inline">
+				<input type="text" placeholder="请输入房间号" class="ac-customId layui-input"
+					   id="searchWithRoomNumber">
+			</div>
+			<div class="layui-input-inline">
+				<a href="javascript:void(0);" id="searchBtn1" class="layui-btn layui-btn-md">查询</a>
+			</div>
+			<!--<div class="layui-btn-container" style="margin-left: 0%;">-->
+				<!--<button type="button" class="layui-btn layui-btn-md layui-btn-primary layui-btn-radius"-->
+					<!--id="publishedBtn" onclick="showPublished()" style="">已发布</button>-->
+				<!--<button type="button" class="layui-btn layui-btn-md layui-btn-primary layui-btn-radius"-->
+					<!--id="unpublishedBtn" onclick="showUnpublished()" style="margin-left: 1%">未发布</button>-->
+				<!--<button type="button" class="layui-btn layui-btn-md" id="articleCreate"-->
+					<!--onclick="toArticleCreate()" style="margin-top: 0%; float: right;">-->
+					<!--<i class="layui-icon">&#xe608;</i>-->
+					<!--创建文章-->
+				<!--</button>-->
+			<!--</div>-->
+			<button type="button" class="layui-btn layui-btn-md" id="meetingRoomCreate"
+				onclick="toMeetingRoomCreate()" style="margin-top: -1%; float: right;">
+				<i class="layui-icon">&#xe608;</i>
+				添加会议室
+			</button>
+		</div>
+		<div style="margin-left: 2%; margin-top: -2%;">
+			<table id="conference" lay-filter="conference" class="layui-table" lay-size="sm"></table>
+			<script type="text/html" id="conferenceActive">
+            	<a class="layui-btn layui-btn-xs" lay-event="update" href="javascript:;">修改</a>
+				<a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del" href="javascript:;">删除</a>
+			</script>
+		</div>
+	</div>
+	<script src="../res/lib/jquery-3.2.1.min.js"></script>
+	<script src="../res/lib/layui/layui.js"></script>
+	<script src="../res/js/common.js"></script>
+	<script src="../res/js/meetingRoomList.js"></script>
+</body>
+</html>
