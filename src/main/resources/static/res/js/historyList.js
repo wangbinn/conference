@@ -9,7 +9,7 @@ layui.use('table', function() {
 		elem : '#history',
 		// limit : 10,
 		// limits : [ 10, 20, 30, 40 ],
-		url : "http://localhost:8080/conference/history?name=" + $('user_name').val(), // 数据接口
+		url : "http://localhost:8080/conference/history?name=" + document.getElementById('user_name').innerHTML, // 数据接口
 		page : false, // 开启分页
 		// where : {},
 		cols : [ [ // 表头

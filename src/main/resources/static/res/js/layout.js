@@ -1,5 +1,6 @@
 //显示用户名
-document.getElementById('user_name').innerHTML = getUrlParam("userName");
+// document.getElementById('user_name').innerHTML = getUrlParam("userName");
+// console.log(document.getElementById('user_name').innerHTML);
 // $('#user_name').val(getUrlParam("userName"));
 
 layui.use([ 'element', 'layer' ], function() {

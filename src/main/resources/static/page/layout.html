@@ -9,6 +9,7 @@
 <link rel="stylesheet" href="../res/lib/layui/css/layui.css" />
 <script src="../res/lib/jquery-3.2.1.min.js"></script>
 <script src="../res/lib/layui/layui.all.js"></script>
+<script src="../res/js/common.js"></script>
 </head>
 <body class="layui-layout-body">
 	<div class="layui-layout layui-layout-admin">
@@ -16,6 +17,10 @@
 			<div class="layui-logo">会议室预定系统</div>
 			<ul class="layui-nav layui-layout-right">
 				<li class="layui-nav-item"><label id="user_name"></label></li>
+				<script type="text/javascript">
+					document.getElementById('user_name').innerHTML = getUrlParam("userName");
+					console.log(document.getElementById('user_name').innerHTML);
+				</script>
 				<li class="layui-nav-item">
 					<a href="Javascript:;" onclick = "logout();">退出</a>
 				</li>
@@ -42,7 +47,6 @@
 		</div>
 	</div>
 
-	<script src="../res/js/common.js"></script>
 	<script src="../res/js/layout.js"></script>
 </body>
 </html>
