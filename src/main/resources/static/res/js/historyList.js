@@ -105,11 +105,25 @@ layui.use('table', function() {
 		let layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
 		let tr = obj.tr; //获得当前行 tr 的DOM对象
 
-		if (layEvent === 'del') { //删除
-			// addParamToUrl("id", data.id);
-			// loadModule("./bookingOK.html");
+		if (layEvent === 'del') { //取消预订
 			layer.confirm('真的取消么', function(index) {
-
+				$.ajax({
+					type : "POST",
+					url : "http://localhost:8080" + "/conference/deleteById",
+					data : {
+						id : data.id
+					},
+					dataType : "json",
+					success : function(data) {
+						tableReload(tables.config.page.curr);
+						obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
+						layer.close(index);
+						layer.msg(data.msg);
+					},
+					error : function(e) {
+						console.log(e);
+					}
+				});
 			});
 		} else if (layEvent === 'noDel') {
 			layer.msg("预定日期已过，不可取消");
