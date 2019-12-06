@@ -58,7 +58,7 @@ public class BookingService {
                 baseService.callProcedure("BookTime_Select",pm);
         JSONArray datas = bookTimeSelect.getDatas();
         //若果返回集合大小为0，则用户预订时间所有会议室都满足
-        if (datas.size()==0){
+        if ((datas.size()==0)||(startTime==""&& endTime=="")){
             //将所有会议室信息返回
             ProcedureContext book_all =
                     baseService.callProcedureWithOutParams("Book_Initialization");
@@ -122,6 +122,7 @@ public class BookingService {
     //将用户选中的会议室信息插入到预定表中
     public Boolean bookingRoom(Integer roomId,String userName,
                                String startTime,String endTime,String apply ){
+
         List<ProcedureParam> pm = new ArrayList<ProcedureParam>();
         ProcedureParam pp1 = new ProcedureParam(1,String.valueOf(roomId), Types.VARCHAR, "IN");
         ProcedureParam pp2 = new ProcedureParam(2,userName, Types.VARCHAR, "IN");
