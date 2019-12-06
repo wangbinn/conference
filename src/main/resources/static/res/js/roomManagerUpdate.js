@@ -47,7 +47,7 @@ layui.use('form', function(){
 
             $.ajax({
                 type: "POST",
-                url: "http://localhost:8080" + "/admin/roomManagerUpdate",
+                url: "http://localhost:8080" + "/prin/roomManagerUpdate",
                 data: { roomManagerInfo : JSON.stringify(data.field)},
                 dataType: "json",
                 success: function(data){

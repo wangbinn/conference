@@ -9,7 +9,7 @@ layui.use('table', function() {
 		elem : '#manager',
 		// limit : 10,
 		// limits : [ 10, 20, 30, 40 ],
-		url : "http://localhost:8080/admin/getPrincipal", // 数据接口
+		url : "http://localhost:8080/prin/getPrincipal", // 数据接口
 		page : false, // 开启分页
 		// where : {},
 		cols : [ [ // 表头
@@ -92,7 +92,7 @@ layui.use('table', function() {
 				layer.confirm('真的删除负责人么', function(index) {
 					$.ajax({
 						type : "POST",
-						url :"http://localhost:8080/admin/deletePrincipalById",
+						url :"http://localhost:8080/prin/deleteById",
 						data : {
 							id : data.id
 						},
