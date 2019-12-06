@@ -69,7 +69,7 @@ public class AdminController {
     @ResponseBody
     public Map conferenceList(String roomNumber){
         JSONArray datas = new JSONArray();
-        if (roomNumber == null){
+        if ((roomNumber == null)||(roomNumber.equals(""))){
             datas = adminService.allBookInfo();
         }else {
             datas = adminService.singleBookInfo(roomNumber);
@@ -136,26 +136,27 @@ public class AdminController {
     @ResponseBody
     public Map meetingRoomUpdate(String meetingRoomInfo){
         JSONObject jsonObject = JSON.parseObject(meetingRoomInfo);
+        Integer roomId=jsonObject.getInteger("id");
         Integer principalId = jsonObject.getInteger("principal");
         String floor = jsonObject.getString("floor");
         String roomNumber = jsonObject.getString("roomNumber");
         Integer seatNumber = jsonObject.getInteger("seatNumber");
         Integer multimedia = jsonObject.getInteger("multimedia");
-        //System.out.println(principalId + floor + roomNumber + seatNumber + multimedia);
-
-        //上面就是参数，这里把这五个都变成可修改的了
-
+        Boolean updateInfo = adminService.updateRoomId(roomId, principalId, floor, roomNumber, seatNumber, multimedia);
+        System.out.println("roomId:"+roomId+"...roomNumber:"+roomNumber+"...principalId:"+principalId
+                +"...floor:"+floor+"...seatNumber:"+seatNumber+"...multimedia:"+multimedia);
+        HashMap map = new HashMap();
 //        Boolean rommBoolean = adminService.createRoom(principalId,
 //                floor, roomNumber, seatNumber, multimedia);
-        HashMap map = new HashMap();
+
 //        Boolean idBoolean = true;
-//        if (rommBoolean==true){
-//            map.put("status","0");
-//            map.put("msg","添加成功");
-//        }else{
-//            map.put("status","1");
-//            map.put("msg","房间号冲突，添加失败！");
-//        }
+        if (updateInfo==true){
+            map.put("status","0");
+            map.put("msg","修改成功");
+        }else{
+            map.put("status","1");
+            map.put("msg","修改失败！");
+        }
         return map;
     }
 

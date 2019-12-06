@@ -19,26 +19,14 @@ import java.util.List;
  * 4、查询会议室
  */
 @Service
-public class AdminService {
+public class PrincipalService {
 
     @Autowired
     BaseService baseService;
     @Autowired
     JdbcTemplate jdbcTemplate;
 
-    //管理者登录
-    public JSONArray adminLogin(String name, String password){
-        List<ProcedureParam> pm = new ArrayList<ProcedureParam>();
-        ProcedureParam pp1 = new ProcedureParam(1,name, Types.VARCHAR, "IN");
-        ProcedureParam pp2 = new ProcedureParam(2,password,Types.VARCHAR, "IN");
-        pm.add(pp1);
-        pm.add(pp2);
-        ProcedureContext user_login = baseService.callProcedure("AdminUser_Login", pm);
-        JSONArray datas = user_login.getDatas();
-        return datas;
-    }
-
-    //查询所有会议室相关信息
+    //查询所有责任人相关信息
     public JSONArray allBookInfo(){
         ProcedureContext initialization = baseService.callProcedureWithOutParams("Book_Initialization");
         JSONArray datas = initialization.getDatas();
@@ -46,7 +34,7 @@ public class AdminService {
         return datas;
     }
 
-    //根据查询的房间号来查会议室相关信息
+    //根据责任人Id来查其相关信息
     public JSONArray singleBookInfo(String roomNo){
         List<ProcedureParam> pm = new ArrayList<ProcedureParam>();
         ProcedureParam pp1 = new ProcedureParam(1,roomNo, Types.VARCHAR, "IN");
@@ -59,7 +47,7 @@ public class AdminService {
         return datas;
     }
 
-    //根据前端传出来的信息创建新的会议室
+    //根据前端传出来的信息创建新的责任人
     public Boolean createRoom(Integer principalId,String floor,String roomNumber,
                               Integer seatNumber,Integer multimedia){
         //将新用户信息注册到用户表
@@ -76,7 +64,7 @@ public class AdminService {
             return false;
     }
 
-    //根据修改会议室相关信息
+    //根据修改责任人相关信息
     public Boolean updateRoomId(Integer roomId,Integer principalId,
                                 String floor,String roomNumber,Integer seatNumber, Integer multimedia){
         String sql="UPDATE MeetingRoom SET floor=?,roomNumber=?,seatNumber=?,principalId=?,multimedia=? WHERE id=?";
@@ -92,7 +80,7 @@ public class AdminService {
             return false;
     }
 
-    //根据房间ID来删除议室相关信息
+    //根据房间ID来删除责任人
     public Boolean deleteRoomById(Integer id){
         String sql="DELETE FROM MeetingRoom WHERE id=?";
         int register=0 ;

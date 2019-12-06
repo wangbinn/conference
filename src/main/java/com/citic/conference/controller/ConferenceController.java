@@ -97,7 +97,7 @@ public class ConferenceController {
            map.put("msg","预订成功");
        }else {
            map.put("status","1");
-           map.put("msg","预订失败");
+           map.put("msg","预订时间重合，预订失败！");
        }
         return map;
     }
