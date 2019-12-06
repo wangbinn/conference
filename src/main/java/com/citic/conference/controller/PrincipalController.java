@@ -34,23 +34,6 @@ public class PrincipalController {
     @Autowired
     JdbcTemplate jdbcTemplate;
 
-//    @RequestMapping("/list")
-//    @ResponseBody
-//    public Map conferenceList(String roomNumber){
-//        JSONArray datas = new JSONArray();
-//        if ((roomNumber == null)||(roomNumber.equals(""))){
-//            datas = adminService.allBookInfo();
-//        }else {
-//            datas = adminService.singleBookInfo(roomNumber);
-//        }
-//        HashMap map = new HashMap();
-//        map.put("code","0");
-//        map.put("msg","this is msg");
-//        map.put("data",datas);
-//        map.put("count",datas.size());
-//        return map;
-//    }
-
     @RequestMapping("/deleteById")
     @ResponseBody
     public Map principalDelete(Integer id){
@@ -111,10 +94,6 @@ public class PrincipalController {
         System.out.println("id:"+id);
         Boolean updateInfo = principalService.updatePrincipalId(id,name,mail,phone);
         HashMap map = new HashMap();
-//        Boolean rommBoolean = adminService.createRoom(principalId,
-//                floor, roomNumber, seatNumber, multimedia);
-
-//        Boolean idBoolean = true;
         if (updateInfo==true){
             map.put("status","0");
             map.put("msg","修改成功");

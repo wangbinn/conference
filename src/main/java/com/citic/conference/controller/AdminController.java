@@ -146,10 +146,6 @@ public class AdminController {
         System.out.println("roomId:"+roomId+"...roomNumber:"+roomNumber+"...principalId:"+principalId
                 +"...floor:"+floor+"...seatNumber:"+seatNumber+"...multimedia:"+multimedia);
         HashMap map = new HashMap();
-//        Boolean rommBoolean = adminService.createRoom(principalId,
-//                floor, roomNumber, seatNumber, multimedia);
-
-//        Boolean idBoolean = true;
         if (updateInfo==true){
             map.put("status","0");
             map.put("msg","修改成功");

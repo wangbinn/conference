@@ -2,17 +2,6 @@ var layer;
 var table;
 var form;
 var $$;
-// var id = getUrlParam('id');
-// var name = getUrlParam('name');
-// var phone = getUrlParam('phone');
-// var mail = getUrlParam('mail');
-// var floor = getUrlParam('floor');
-// var roomNumber = getUrlParam('roomNumber');
-// var seatNumber = getUrlParam('seatNumber');
-// var multimedia = getUrlParam('multimedia');
-// var userName = getUrlParam('userName');
-// var startTime = getUrlParam('startTime');
-// var endTime = getUrlParam('endTime');
 
 layui.use('table', function(){
     table = layui.table;
@@ -34,24 +23,6 @@ layui.use('element', function(){
 layui.use('jquery', function(){
     $$ = layui.jquery;
 });
-
-// labelEdit();
-// layui.use('form', function() {
-//     form = layui.form;
-//     form.val("editPageInit", {
-//         "id" : id,
-//         "bookingWithStartDate" : startTime,
-//         "bookingWithEndDate" : endTime,
-//         "name" : name,
-//         "phone" : phone,
-//         "mail" : mail,
-//         "floor" : floor,
-//         "roomNumber" : roomNumber,
-//         "seatNumber" : seatNumber,
-//         "multimedia" : multimedia,
-//         "userName" : userName
-//     })
-// });
 
 layui.use('form', function(){
     var form = layui.form;

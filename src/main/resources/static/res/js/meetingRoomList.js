@@ -152,23 +152,6 @@ layui.use('table', function() {
 			}
 	});
 
-	// table.on('rowDouble(conference)', function(obj) {
-	// 	let article = obj.data;
-	// 	layer.open({
-	// 		type : 2,
-	// 		title : '查看文章: ' + article.name,
-	// 		btn : [ '关闭' ],
-	// 		area : [ '76%', '90%' ],
-	// 		content : './articleView.html?articleId=' + article.id,
-	// 		time: 5000,
-	// 		success : function(data) {
-	// 		},
-	// 		yes : function(index) {
-	// 			layer.close(index);
-	// 		}
-	// 	});
-	// });
-
 });
 
 layui.use('layer', function() {
@@ -187,8 +170,6 @@ function tableReload(pageNum) {
 	tables.reload({
 		where : {
 			roomNumber : $("#searchWithRoomNumber").val()
-			// endDate : $("#searchWithEndDate").val()
-			// status : status
 		}
 		// ,
 		// page : {

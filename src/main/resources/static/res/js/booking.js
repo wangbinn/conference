@@ -67,7 +67,7 @@ layui.use('form', function(){
                 dataType: "json",
                 success: function(data){
                     if (data.status == "0") {
-                        layer.msg(data.msg,{time:2*1000},function () {
+                        layer.msg(data.msg,{time:1*1000},function () {
                             parent.layer.closeAll();
                             // loadModule("./historyList.html");
                         });

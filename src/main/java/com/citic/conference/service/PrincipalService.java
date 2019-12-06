@@ -26,27 +26,6 @@ public class PrincipalService {
     @Autowired
     JdbcTemplate jdbcTemplate;
 
-    //查询所有责任人相关信息
-//    public JSONArray allBookInfo(){
-//        ProcedureContext initialization = baseService.callProcedureWithOutParams("Book_Initialization");
-//        JSONArray datas = initialization.getDatas();
-//        System.out.println(datas);
-//        return datas;
-//    }
-
-//    //根据责任人Id来查其相关信息
-//    public JSONArray singleBookInfo(String roomNo){
-//        List<ProcedureParam> pm = new ArrayList<ProcedureParam>();
-//        ProcedureParam pp1 = new ProcedureParam(1,roomNo, Types.VARCHAR, "IN");
-//        //System.out.println("name"+name);
-//        pm.add(pp1);
-//        ProcedureContext scheduledRecord =
-//                baseService.callProcedure("Select_MeetRoomInfo", pm);
-//        JSONArray datas = scheduledRecord.getDatas();
-//        System.out.println(datas);
-//        return datas;
-//    }
-
     //根据前端传出来的信息创建新的责任人
     public Boolean createPrincipal(String name,String mail,String phone){
         String sql="INSERT INTO Principal (name,mail,phone) VALUES(?,?,?)";
