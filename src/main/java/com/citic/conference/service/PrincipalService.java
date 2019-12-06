@@ -27,34 +27,32 @@ public class PrincipalService {
     JdbcTemplate jdbcTemplate;
 
     //查询所有责任人相关信息
-    public JSONArray allBookInfo(){
-        ProcedureContext initialization = baseService.callProcedureWithOutParams("Book_Initialization");
-        JSONArray datas = initialization.getDatas();
-        System.out.println(datas);
-        return datas;
-    }
+//    public JSONArray allBookInfo(){
+//        ProcedureContext initialization = baseService.callProcedureWithOutParams("Book_Initialization");
+//        JSONArray datas = initialization.getDatas();
+//        System.out.println(datas);
+//        return datas;
+//    }
 
-    //根据责任人Id来查其相关信息
-    public JSONArray singleBookInfo(String roomNo){
-        List<ProcedureParam> pm = new ArrayList<ProcedureParam>();
-        ProcedureParam pp1 = new ProcedureParam(1,roomNo, Types.VARCHAR, "IN");
-        //System.out.println("name"+name);
-        pm.add(pp1);
-        ProcedureContext scheduledRecord =
-                baseService.callProcedure("Select_MeetRoomInfo", pm);
-        JSONArray datas = scheduledRecord.getDatas();
-        System.out.println(datas);
-        return datas;
-    }
+//    //根据责任人Id来查其相关信息
+//    public JSONArray singleBookInfo(String roomNo){
+//        List<ProcedureParam> pm = new ArrayList<ProcedureParam>();
+//        ProcedureParam pp1 = new ProcedureParam(1,roomNo, Types.VARCHAR, "IN");
+//        //System.out.println("name"+name);
+//        pm.add(pp1);
+//        ProcedureContext scheduledRecord =
+//                baseService.callProcedure("Select_MeetRoomInfo", pm);
+//        JSONArray datas = scheduledRecord.getDatas();
+//        System.out.println(datas);
+//        return datas;
+//    }
 
     //根据前端传出来的信息创建新的责任人
-    public Boolean createRoom(Integer principalId,String floor,String roomNumber,
-                              Integer seatNumber,Integer multimedia){
-        //将新用户信息注册到用户表
-        String sql="INSERT INTO MeetingRoom (floor,roomNumber,seatNumber,principalId,multimedia) VALUES(?,?,?,?,?)";
+    public Boolean createPrincipal(String name,String mail,String phone){
+        String sql="INSERT INTO Principal (name,mail,phone) VALUES(?,?,?)";
         int register=0 ;
         try {
-            register=jdbcTemplate.update(sql,floor,roomNumber,seatNumber,principalId,multimedia);
+            register=jdbcTemplate.update(sql,name,mail,phone);
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -65,12 +63,11 @@ public class PrincipalService {
     }
 
     //根据修改责任人相关信息
-    public Boolean updateRoomId(Integer roomId,Integer principalId,
-                                String floor,String roomNumber,Integer seatNumber, Integer multimedia){
-        String sql="UPDATE MeetingRoom SET floor=?,roomNumber=?,seatNumber=?,principalId=?,multimedia=? WHERE id=?";
+    public Boolean updatePrincipalId(Integer principalId,String name,String mail,String phone){
+        String sql="UPDATE Principal SET name=?,mail=?,phone=? WHERE id=?";
         int register=0 ;
         try {
-            register=jdbcTemplate.update(sql,floor,roomNumber,seatNumber,principalId,multimedia,roomId);
+            register=jdbcTemplate.update(sql,name,mail,phone,principalId);
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -80,9 +77,9 @@ public class PrincipalService {
             return false;
     }
 
-    //根据房间ID来删除责任人
-    public Boolean deleteRoomById(Integer id){
-        String sql="DELETE FROM MeetingRoom WHERE id=?";
+    //根据房间ID来删除责任人AdminController
+    public Boolean deletePrincipalById(Integer id){
+        String sql="DELETE FROM Principal WHERE id=?";
         int register=0 ;
         try {
             register=jdbcTemplate.update(sql, id);
